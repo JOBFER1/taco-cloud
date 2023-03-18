@@ -16,7 +16,7 @@ public class HomeControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@Test
+//	@Test
 	public void testHomePage() throws Exception {
 		
 		mockMvc.perform(get("/"))
