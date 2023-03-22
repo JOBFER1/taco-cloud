@@ -1,5 +1,6 @@
 package tacos.web;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,9 @@ import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Taco;
 import tacos.TacoOrder;
+import tacos.User;
 import tacos.data.IngredientRepository;
+import tacos.data.UserRepository;
 
 @Slf4j
 @Controller
@@ -29,9 +32,19 @@ public class DesignTacoController {
 	
 	private final IngredientRepository ingredientRepo;
 	
+	private UserRepository userRepo;
+	
 	@Autowired
-	public DesignTacoController(IngredientRepository ingredientRepo) {
+	public DesignTacoController(IngredientRepository ingredientRepo, UserRepository userRepo) {
 		this.ingredientRepo = ingredientRepo;
+		this.userRepo = userRepo;
+	}
+	
+	@ModelAttribute(name = "user")
+	public User user(Principal principal) {
+		String username = principal.getName();
+		User user = userRepo.findByUsername(username);
+		return user;
 	}
 	
 	@ModelAttribute
