@@ -1,6 +1,5 @@
 package tacos;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +21,9 @@ import lombok.Data;
 @Data
 @Entity
 public class TacoOrder {
+	
+	@ManyToOne
+	private User user;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,7 +56,7 @@ public class TacoOrder {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Taco> tacos = new ArrayList<>();
-
+	
 	public void addTaco(Taco taco) {
 		this.tacos.add(taco);
 	}
