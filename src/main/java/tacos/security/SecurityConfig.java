@@ -36,10 +36,12 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http
-				.csrf().ignoringRequestMatchers(PathRequest.toH2Console())
-				.and()
-	            .headers().frameOptions().sameOrigin()
-	            .and()
+//				.csrf().ignoringRequestMatchers(PathRequest.toH2Console())
+//				.and()
+//	            .headers().frameOptions().sameOrigin()
+//	            .and()
+				
+				.csrf().disable()
 	            
 				.authorizeHttpRequests()
 				.requestMatchers("/design", "/orders")
